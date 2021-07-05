@@ -1,0 +1,58 @@
+﻿<t:NTTabPage	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:t="clr-namespace:NinjaTrader.Gui.Tools;assembly=NinjaTrader.Gui"          
+		xmlns:system="clr-namespace:System;assembly=mscorlib" 
+		xmlns:TradePerformance="clr-namespace:NinjaTrader.Gui.TradePerformance;assembly=NinjaTrader.Gui" 
+		xmlns:AccountData="clr-namespace:NinjaTrader.Gui.AccountData;assembly=NinjaTrader.Gui" 
+		xmlns:AtmStrategy="clr-namespace:NinjaTrader.Gui.NinjaScript.AtmStrategy;assembly=NinjaTrader.Gui"
+        x:Class="RiskCenterProject.RiskCenter"
+        xmlns:custom="clr-namespace:RiskCenterProject.RiskRules" >
+
+    <Grid Background="Transparent">
+        <!-- Define our layout as two columns. Left side will be all of our controls. Right side will be our output box -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="45*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left side controls -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- ACCOUNT SECTION -->
+
+                <t:AccountSelector		x:Name="accountSelector" Grid.Row="0">
+                    <t:AccountSelector.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource PaddingColumn}" Bottom="0" Right="{StaticResource MarginBase}" />
+                    </t:AccountSelector.Margin>
+                </t:AccountSelector>
+
+                <Button x:Name="addRuleButton" Content="Add Rule" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+
+                <ItemsControl ItemsSource="{Binding Path=CurrentAccountRules}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type custom:DailyLossLimit}">
+                            <custom:DailyLossLimitControl>
+                                <custom:DailyLossLimitControl.Margin>
+                                    <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                                </custom:DailyLossLimitControl.Margin>
+                            </custom:DailyLossLimitControl>
+                         </DataTemplate>
+                     </ItemsControl.ItemTemplate>  
+                </ItemsControl>
+
+                <Button x:Name="addRuleButton2" Content="Add Rule" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Right side output box -->
+        <TextBox x:Name="outputBox" Margin="{Binding Source={StaticResource MarginBase}}" Grid.Column="1" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+    </Grid>
+</t:NTTabPage>

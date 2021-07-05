@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="RiskCenterProject.RiskRules.DailyLossLimitControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RiskCenterProject.RiskRules"
+             mc:Ignorable="d" 
+             >
+    <Expander Name="ExpanderControl" HorizontalAlignment="Left" Header="{Binding Display}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Display}" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" />
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Display, Mode=TwoWay}" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" />
+            
+            <TextBlock TextWrapping="Wrap" Text="Limit Type" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" />
+            <ComboBox 
+            ItemsSource="{Binding LimitTypeValues}"
+            SelectedItem="{Binding LimitType}"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1"/>
+
+            <TextBlock TextWrapping="Wrap" Text="Value" VerticalAlignment="Top" Grid.Column="0" Grid.Row="2" />
+            <TextBox 
+            Text="{Binding Value}"
+            PreviewTextInput="NumberValidationTextBox"
+            HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="2"/>
+
+            <TextBlock TextWrapping="Wrap" Text="Consequence" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" />
+            <ComboBox 
+            ItemsSource="{Binding ViolationTypeValues}"
+            SelectedItem="{Binding Consequence}"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="3"/>
+
+            <TextBlock TextWrapping="Wrap" Text="Message" VerticalAlignment="Top" Grid.Column="0" Grid.Row="4" />
+            <TextBox 
+            Text="{Binding Message}"
+            HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="4"/>
+
+        </Grid>
+    </Expander>
+</UserControl>
